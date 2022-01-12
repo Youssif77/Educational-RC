@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <link rel="stylesheet" href="./public/css/style.css" />
     <title>Educational RC</title>
   </head>
@@ -15,94 +18,134 @@
       <header class="header">
         <h1 class="header__title">Look and match.</h1>
         <figure class="header__btns">
-          <div class="header__btns--item">
+          <div class="header__btns--item resource-btn">
             <img src="./public/img/resourse_icon.png" alt="resourse" />
           </div>
-          <div class="header__btns--item">
+          <div class="header__btns--item help-btn">
             <img src="./public/img/help_icon.png" alt="help" />
           </div>
         </figure>
       </header>
       <!-- End Header -->
 
-      <!-- Start Game -->
-      <main class="game">
-        <div class="game--bg">
-          <div class="game__questions">
-            <figure class="game__questions--item">
-              <img src="./public/img/p19ex21_1.png" alt="scissors" />
-              <div class="match-circle" data-question="scissors"></div>
-            </figure>
-
-            <figure class="game__questions--item">
-              <img src="./public/img/p19ex21_2.png" alt="board" />
-              <div class="match-circle" data-question="board"></div>
-            </figure>
-
-            <figure class="game__questions--item">
-              <img src="./public/img/p19ex21_3.png" alt="chair" />
-              <div class="match-circle" data-question="chair"></div>
-            </figure>
-
-            <figure class="game__questions--item">
-              <img src="./public/img/p19ex21_4.png" alt="window" />
-              <div class="match-circle" data-question="window"></div>
-            </figure>
-          </div>
-
-          <div class="game__results">
-            <audio
-              preload="auto"
-              controls="none"
-              class="correct-sound"
-              src="./public/audio/correct.mp3"
-            ></audio>
-            <audio
-              preload="auto"
-              controls="none"
-              class="incorrect-sound"
-              src="./public/audio/incorrect.mp3"
-            ></audio>
-          </div>
-
-          <div class="game__answers">
-            <div class="game__answers--item">
-              <div class="match-circle" data-answer="chair"></div>
-              <h2>chair</h2>
+      <main class="main">
+        <div class="main--bg">
+          <div class="resource hidden">
+            <div class="resource__img">
+              <img src="./public/img/dummy.jpg" alt="dummy" />
             </div>
-
-            <div class="game__answers--item">
-              <div class="match-circle" data-answer="window"></div>
-              <h2>window</h2>
-            </div>
-
-            <div class="game__answers--item">
-              <div class="match-circle" data-answer="scissors"></div>
-              <h2>scissors</h2>
-            </div>
-
-            <div class="game__answers--item">
-              <div class="match-circle" data-answer="board"></div>
-              <h2>board</h2>
+            <div class="close-btn">
+              <img src="./public/img/close_icon.png" alt="close" />
             </div>
           </div>
+
+          <div class="help hidden">
+            <h3>Help content goes here</h3>
+            <div class="close-btn">
+              <img src="./public/img/close_icon.png" alt="close" />
+            </div>
+          </div>
+          <!-- Start Game -->
+          <div class="game">
+            <div class="game__questions">
+              <figure class="game__questions--item" data-question="scissors">
+                <img src="./public/img/p19ex21_1.png" alt="scissors" />
+                <div class="match-circle"></div>
+              </figure>
+
+              <figure class="game__questions--item" data-question="board">
+                <img src="./public/img/p19ex21_2.png" alt="board" />
+                <div class="match-circle"></div>
+              </figure>
+
+              <figure class="game__questions--item" data-question="chair">
+                <img src="./public/img/p19ex21_3.png" alt="chair" />
+                <div class="match-circle"></div>
+              </figure>
+
+              <figure class="game__questions--item" data-question="window">
+                <img src="./public/img/p19ex21_4.png" alt="window" />
+                <div class="match-circle"></div>
+              </figure>
+            </div>
+
+            <div class="game__results">
+              <audio
+                preload="auto"
+                controls="none"
+                class="correct-sound"
+                src="./public/audio/correct.mp3"
+              ></audio>
+              <audio
+                preload="auto"
+                controls="none"
+                class="incorrect-sound"
+                src="./public/audio/incorrect.mp3"
+              ></audio>
+              <svg width="100%" height="120"></svg>
+            </div>
+
+            <div class="game__answers">
+              <div class="game__answers--item" data-answer="chair">
+                <div class="match-circle"></div>
+                <h2>chair</h2>
+                <img
+                  class="hidden wrong-answer"
+                  src="./public/img/crossMark.png"
+                  alt="wrong answer"
+                />
+              </div>
+
+              <div class="game__answers--item" data-answer="window">
+                <div class="match-circle"></div>
+                <h2>window</h2>
+                <img
+                  class="hidden wrong-answer"
+                  src="./public/img/crossMark.png"
+                  alt="wrong answer"
+                />
+              </div>
+
+              <div class="game__answers--item" data-answer="scissors">
+                <div class="match-circle"></div>
+                <h2>scissors</h2>
+                <img
+                  class="hidden wrong-answer"
+                  src="./public/img/crossMark.png"
+                  alt="wrong answer"
+                />
+              </div>
+
+              <div class="game__answers--item" data-answer="board">
+                <div class="match-circle"></div>
+                <h2>board</h2>
+                <img
+                  class="hidden wrong-answer"
+                  src="./public/img/crossMark.png"
+                  alt="wrong answer"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- End Game -->
         </div>
       </main>
-      <!-- End Game -->
 
       <!-- Start Footer -->
       <footer class="footer">
         <figure class="footer__btns">
-          <div class="footer__btns--item">
+          <div class="footer__btns--item replay">
             <img src="./public/img/replay_icon.png" alt="replay" />
           </div>
-          <div class="footer__btns--item">
+          <div class="footer__btns--item show-ans">
             <img src="./public/img/showAns_icon.png" alt="showAns" />
           </div>
         </figure>
       </footer>
       <!-- End Footer -->
+
+      <div class="backdrop hidden"></div>
     </div>
-    <script src="./public/js/script.js"></script>
+    <script src="./public/js/script.js" type="module"></script>
   </body>
 </html>

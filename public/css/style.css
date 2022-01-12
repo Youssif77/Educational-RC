@@ -27,15 +27,6 @@ body {
   background-color: #fff;
 }
 
-.hidden {
-  display: none;
-}
-
-.disabled {
-  opacity: 0.6;
-  cursor: default !important;
-}
-
 h1 {
   font-size: 1.6rem;
   font-weight: 500;
@@ -62,7 +53,7 @@ img {
 .container {
   transition: all 500ms ease-in-out;
   position: absolute;
-  width: 900px;
+  width: 750px;
   top: 0;
   left: 0;
   right: 0;
@@ -80,41 +71,82 @@ img {
 
 .header__btns {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .header__btns--item {
   cursor: pointer;
-  flex: 0 1 35%;
-  margin-left: 10%;
+  flex: 0 1 30%;
+}
+.header__btns--item:last-child {
+  margin-left: 15%;
 }
 
-/* Game */
-.game {
+.main {
   height: 70vh;
   background-color: var(--bg-color);
   position: relative;
 }
 
-.game--bg {
+.main--bg {
   position: absolute;
   top: -2vh;
   left: 1rem;
   width: calc(100% - 2rem);
   height: 74vh;
-  padding-top: 1rem;
-  border: 4px solid var(--secondary-color);
+  padding: 1rem 0 1rem;
+  border: 3px solid var(--secondary-color);
   border-radius: 15px;
   background-color: #fff;
+  z-index: 100;
 }
 
-.game__questions {
-  margin-bottom: 7rem;
+/* Backdrop */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.75);
+  z-index: 10;
 }
 
+/* Resource */
+.resource,
+.help {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  padding: 0 0.8rem;
+  overflow: hidden;
+}
+
+.resource__img {
+  width: 95%;
+}
+
+/* Help */
+.help h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.close-btn {
+  width: 2.2rem;
+  cursor: pointer;
+}
+
+/* Game */
 .game__questions,
 .game__answers {
   display: flex;
+}
+
+.game__questions--item {
+  justify-content: space-between;
 }
 
 .game__questions--item,
@@ -122,29 +154,70 @@ img {
   display: flex;
   width: 25%;
   flex-direction: column;
-  justify-content: space-between;
+  height: 160px;
   align-items: center;
   cursor: pointer;
 }
 
 .game__questions--item img {
-  height: 60%;
+  height: 70%;
+}
+
+.game__answers--item img {
+  height: 20%;
+  animation: blink-animation 0.3s steps(15, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    opacity: 0.6;
+    visibility: hidden;
+  }
 }
 
 .game__answers--item h2 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 500;
 }
 
-.game__results {
+.game__results audio {
   display: none;
 }
 
+.game__results line {
+  stroke: #0fa0c5;
+  stroke-width: 3px;
+  stroke-dasharray: 2000px;
+  stroke-dashoffset: 2000px;
+  animation: match 0.6s ease-in-out forwards;
+}
+
+@keyframes match {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
 .match-circle {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border: 3px solid var(--secondary-color);
   border-radius: 50%;
+  position: relative;
+  background-color: #fff;
+}
+
+.match-circle.selected {
+  border-color: #f5831f7e;
+  cursor: default;
+}
+
+.game__questions .match-circle {
+  bottom: -10px;
+}
+
+.game__answers .match-circle {
+  top: -14px;
 }
 
 .match-circle.active {
@@ -172,4 +245,13 @@ img {
 .footer__btns--item:last-child {
   flex: 0 1 8%;
   margin-left: 55%;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: default;
 }
