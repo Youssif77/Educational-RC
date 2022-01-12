@@ -4,11 +4,105 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./public/css/style.css" />
     <title>Educational RC</title>
   </head>
   <body>
     <div class="loader"></div>
-    <script src="script.js"></script>
+
+    <div class="container">
+      <!-- Start Header -->
+      <header class="header">
+        <h1 class="header__title">Look and match.</h1>
+        <figure class="header__btns">
+          <div class="header__btns--item">
+            <img src="./public/img/resourse_icon.png" alt="resourse" />
+          </div>
+          <div class="header__btns--item">
+            <img src="./public/img/help_icon.png" alt="help" />
+          </div>
+        </figure>
+      </header>
+      <!-- End Header -->
+
+      <!-- Start Game -->
+      <main class="game">
+        <div class="game--bg">
+          <div class="game__questions">
+            <figure class="game__questions--item">
+              <img src="./public/img/p19ex21_1.png" alt="scissors" />
+              <div class="match-circle" data-question="scissors"></div>
+            </figure>
+
+            <figure class="game__questions--item">
+              <img src="./public/img/p19ex21_2.png" alt="board" />
+              <div class="match-circle" data-question="board"></div>
+            </figure>
+
+            <figure class="game__questions--item">
+              <img src="./public/img/p19ex21_3.png" alt="chair" />
+              <div class="match-circle" data-question="chair"></div>
+            </figure>
+
+            <figure class="game__questions--item">
+              <img src="./public/img/p19ex21_4.png" alt="window" />
+              <div class="match-circle" data-question="window"></div>
+            </figure>
+          </div>
+
+          <div class="game__results">
+            <audio
+              preload="auto"
+              controls="none"
+              class="correct-sound"
+              src="./public/audio/correct.mp3"
+            ></audio>
+            <audio
+              preload="auto"
+              controls="none"
+              class="incorrect-sound"
+              src="./public/audio/incorrect.mp3"
+            ></audio>
+          </div>
+
+          <div class="game__answers">
+            <div class="game__answers--item">
+              <div class="match-circle" data-answer="chair"></div>
+              <h2>chair</h2>
+            </div>
+
+            <div class="game__answers--item">
+              <div class="match-circle" data-answer="window"></div>
+              <h2>window</h2>
+            </div>
+
+            <div class="game__answers--item">
+              <div class="match-circle" data-answer="scissors"></div>
+              <h2>scissors</h2>
+            </div>
+
+            <div class="game__answers--item">
+              <div class="match-circle" data-answer="board"></div>
+              <h2>board</h2>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- End Game -->
+
+      <!-- Start Footer -->
+      <footer class="footer">
+        <figure class="footer__btns">
+          <div class="footer__btns--item">
+            <img src="./public/img/replay_icon.png" alt="replay" />
+          </div>
+          <div class="footer__btns--item">
+            <img src="./public/img/showAns_icon.png" alt="showAns" />
+          </div>
+        </figure>
+      </footer>
+      <!-- End Footer -->
+    </div>
+    <script src="./public/js/script.js"></script>
   </body>
 </html>
