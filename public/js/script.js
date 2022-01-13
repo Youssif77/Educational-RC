@@ -1,5 +1,4 @@
 'use strict';
-import { getCircle, addClass, removeClass } from './helper.js';
 
 const loader = document.querySelector('.loader');
 const questionsSelectors = document.querySelectorAll('[data-question]');
@@ -206,4 +205,17 @@ function closeHelpModel() {
   addClass(resourceContainer, 'hidden');
   addClass(backdropContainer, 'hidden');
   removeClass(gameContainer, 'hidden');
+}
+
+// Helper
+function getCircle(parent) {
+  return parent.querySelector('.match-circle');
+}
+
+function addClass(element, className) {
+  element.classList.add(className);
+}
+
+function removeClass(element, className) {
+  element.classList.remove(className);
 }
