@@ -2,5 +2,5 @@
 
 ## To run project
 
-1. npm install
-2. run npm start
+1. open the index.html
+2. Enjoy
