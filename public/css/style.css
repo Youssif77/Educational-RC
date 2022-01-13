@@ -82,7 +82,7 @@ img {
 }
 
 .header__btns--item:last-child {
-  margin-left: 15%;
+  margin-left: 18%;
 }
 
 .main {
@@ -144,6 +144,10 @@ img {
 /* Game */
 .game__questions {
   margin-top: 20px;
+}
+
+.game__answers {
+  margin-top: -18px;
 }
 
 .game__questions,
@@ -224,11 +228,7 @@ img {
 }
 
 .game__questions .match-circle {
-  bottom: -18px;
-}
-
-.game__answers .match-circle {
-  top: -18px;
+  bottom: -15px;
 }
 
 .match-circle.active {
