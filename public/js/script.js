@@ -1,85 +1,85 @@
-'use strict';
+"use strict";
 
-const loader = document.querySelector('.loader');
-const questionsSelectors = document.querySelectorAll('[data-question]');
-const answersSelectors = document.querySelectorAll('[data-answer]');
+const loader = document.querySelector(".loader");
+const questionsSelectors = document.querySelectorAll("[data-question]");
+const answersSelectors = document.querySelectorAll("[data-answer]");
 
-const correctSound = document.querySelector('.correct-sound');
-const incorrectSound = document.querySelector('.incorrect-sound');
+const correctSound = document.querySelector(".correct-sound");
+const incorrectSound = document.querySelector(".incorrect-sound");
 
-const appContainer = document.querySelector('.container');
-const backdropContainer = document.querySelector('.backdrop');
-const resourceContainer = document.querySelector('.resource');
-const helpContainer = document.querySelector('.help');
-const gameContainer = document.querySelector('.game');
-const linesContainer = document.querySelector('.game__results svg');
+const appContainer = document.querySelector(".container");
+const backdropContainer = document.querySelector(".backdrop");
+const resourceContainer = document.querySelector(".resource");
+const helpContainer = document.querySelector(".help");
+const gameContainer = document.querySelector(".game");
+const linesContainer = document.querySelector(".game__results svg");
 
-const replayBtn = document.querySelector('.replay');
-const showAnsBtn = document.querySelector('.show-ans');
-const resourceBtn = document.querySelector('.resource-btn');
-const helpBtn = document.querySelector('.help-btn');
-const closeBtns = document.querySelectorAll('.close-btn');
+const replayBtn = document.querySelector(".replay");
+const showAnsBtn = document.querySelector(".show-ans");
+const resourceBtn = document.querySelector(".resource-btn");
+const helpBtn = document.querySelector(".help-btn");
+const closeBtns = document.querySelectorAll(".close-btn");
 
 const state = {
-  currentQuestion: '',
+  currentQuestion: "",
   currentQuestionSelector: null,
 };
 
 // Event listeners
-document.addEventListener('DOMContentLoaded', function hideLoader() {
-  addClass(loader, 'hidden');
-  resclaeWindow();
+document.addEventListener("DOMContentLoaded", function hideLoader() {
+  addClass(loader, "hidden");
+  rescaleWindow();
 });
 
-window.addEventListener('resize', resclaeWindow);
+window.addEventListener("resize", rescaleWindow);
 
-questionsSelectors.forEach(circle => {
-  circle.addEventListener('click', selectQuestion);
+questionsSelectors.forEach((circle) => {
+  circle.addEventListener("click", selectQuestion);
 });
 
-answersSelectors.forEach(circle => {
-  circle.addEventListener('click', selectAnswer);
+answersSelectors.forEach((circle) => {
+  circle.addEventListener("click", selectAnswer);
 });
 
-showAnsBtn.addEventListener('click', showAnswer);
+showAnsBtn.addEventListener("click", showAnswer);
 
-replayBtn.addEventListener('click', resetGame);
+replayBtn.addEventListener("click", resetGame);
 
-resourceBtn.addEventListener('click', openResourcModal);
+resourceBtn.addEventListener("click", openResourcModal);
 
-helpBtn.addEventListener('click', openHelpModal);
+helpBtn.addEventListener("click", openHelpModal);
 
-closeBtns.forEach(btn => btn.addEventListener('click', closeHelpModel));
+closeBtns.forEach((btn) => btn.addEventListener("click", closeHelpModel));
 
 // Event Handlers
 function selectQuestion(e) {
-  const currentQuestionSelector = e.target.closest('[data-question]');
+  const currentQuestionSelector = e.target.closest("[data-question]");
 
-  if (currentQuestionSelector.classList.contains('disabled')) return;
+  if (currentQuestionSelector.classList.contains("disabled")) return;
 
-  questionsSelectors.forEach(selector =>
-    removeClass(getCircle(selector), 'active')
+  questionsSelectors.forEach((selector) =>
+    removeClass(getCircle(selector), "active")
   );
 
-  addClass(getCircle(currentQuestionSelector), 'active');
+  addClass(getCircle(currentQuestionSelector), "active");
 
   state.currentQuestion = currentQuestionSelector.dataset.question;
   state.currentQuestionSelector = currentQuestionSelector;
 }
 
 function selectAnswer(e) {
-  const currentAnswerSelector = e.target.closest('[data-answer]');
+  const currentAnswerSelector = e.target.closest("[data-answer]");
 
   if (!state.currentQuestion) return;
-  if (currentAnswerSelector.classList.contains('disabled')) return;
+  if (currentAnswerSelector.classList.contains("disabled")) return;
 
   // Show wrong answer img and play incorrect sound
   if (state.currentQuestion !== currentAnswerSelector.dataset.answer) {
-    const crossImg = currentAnswerSelector.querySelector('.wrong-answer');
-    removeClass(crossImg, 'hidden');
+    const crossImg = currentAnswerSelector.querySelector(".wrong-answer");
+    removeClass(crossImg, "hidden");
 
     setTimeout(() => {
-      addClass(crossImg, 'hidden');
+      addClass(crossImg, "hidden");
     }, 500);
 
     return incorrectSound.play();
@@ -98,20 +98,20 @@ function selectAnswer(e) {
   );
 
   // Unselect the current question circle
-  removeClass(getCircle(state.currentQuestionSelector), 'active');
+  removeClass(getCircle(state.currentQuestionSelector), "active");
 
   // Rest state
-  state.currentQuestion = '';
+  state.currentQuestion = "";
   state.currentQuestionSelector = null;
   correctSound.play();
 }
 
 function disableQuestionAndAnswer(questionSelector, answerSelector) {
-  addClass(questionSelector.querySelector('img'), 'disabled');
-  addClass(getCircle(questionSelector), 'selected');
+  addClass(questionSelector.querySelector("img"), "disabled");
+  addClass(getCircle(questionSelector), "selected");
 
-  addClass(answerSelector.querySelector('h2'), 'disabled');
-  addClass(getCircle(answerSelector), 'selected');
+  addClass(answerSelector.querySelector("h2"), "disabled");
+  addClass(getCircle(answerSelector), "selected");
 }
 
 function renderConnectionLines(questionCircle, answerCircle) {
@@ -120,21 +120,48 @@ function renderConnectionLines(questionCircle, answerCircle) {
 
   // X1 from left the quesion, y1 from the top of svg
   // X2 from left the answer, y2 from the bottom of svg
-  const html = `<line  x1="${x1}" y1="0" x2="${x2}" y2="120"  />`;
+  const html = `<line  x1="${x1}" y1="0" x2="${x2}" y2="${linesContainer.clientHeight}"  />`;
 
-  linesContainer.insertAdjacentHTML('beforeend', html);
+  linesContainer.insertAdjacentHTML("beforeend", html);
 }
 
-function resclaeWindow() {
-  const diffAppFromWindow = window.innerWidth - appContainer.clientWidth;
-  if (diffAppFromWindow > 0) {
-    appContainer.style.right = `${diffAppFromWindow / 2}px`;
-    appContainer.style.left = `${diffAppFromWindow / 2}px`;
-    // Reset the scale
-    appContainer.style.transform = 'scale(1)';
+// function rescaleWindow() {
+// const diffAppFromWindow = window.innerWidth - appContainer.clientWidth;
+// if (diffAppFromWindow > 0) {
+//   appContainer.style.right = `${diffAppFromWindow / 2}px`;
+//   appContainer.style.left = `${diffAppFromWindow / 2}px`;
+//   // Reset the scale
+//   appContainer.style.transform = "scale(1)";
+//   return;
+// }
+// if (window.innerWidth < window.innerHeight) console.log(window.innerHeight);
+// appContainer.style.left = `0px`;
+// appContainer.style.transform = `scale(${
+//   ((3 / 4) * window.innerWidth) / window.innerHeight
+// })`;
+// }
+
+function rescaleWindow(e) {
+  // the equations ==> 2 * Left + appWidth * ratio = windowWidth
+  //               ==> appHeight * ratio = windowHeigth
+
+  // 1) if aspect of window greater than our app
+  const baseRatio = appContainer.clientWidth / appContainer.clientHeight;
+  const windowRatio = window.innerWidth / window.innerHeight;
+
+  if (windowRatio > baseRatio) {
+    const ratio = window.innerHeight / appContainer.clientHeight;
+
+    appContainer.style.left = `${
+      (window.innerWidth - appContainer.clientWidth * ratio) / 2
+    }px`;
+
+    appContainer.style.transform = `scale(${ratio})`;
     return;
   }
 
+  // 2) else
+  // Reset the margin
   appContainer.style.left = `0px`;
   appContainer.style.transform = `scale(${
     window.innerWidth / appContainer.clientWidth
@@ -142,8 +169,8 @@ function resclaeWindow() {
 }
 
 function showAnswer() {
-  questionsSelectors.forEach(questionSelector => {
-    answersSelectors.forEach(answerSelector => {
+  questionsSelectors.forEach((questionSelector) => {
+    answersSelectors.forEach((answerSelector) => {
       if (questionSelector.dataset.question === answerSelector.dataset.answer) {
         renderConnectionLines(
           getCircle(questionSelector),
@@ -155,61 +182,61 @@ function showAnswer() {
     });
   });
 
-  addClass(showAnsBtn, 'disabled');
-  showAnsBtn.removeEventListener('click', showAnswer);
+  addClass(showAnsBtn, "disabled");
+  showAnsBtn.removeEventListener("click", showAnswer);
 }
 
 function resetGame() {
   // Reset the state
-  state.currentQuestion = '';
+  state.currentQuestion = "";
   state.currentQuestionSelector = null;
 
   // Reset the answers selectors
-  answersSelectors.forEach(answerSelector => {
-    removeClass(answerSelector.querySelector('h2'), 'disabled');
-    removeClass(getCircle(answerSelector), 'selected');
+  answersSelectors.forEach((answerSelector) => {
+    removeClass(answerSelector.querySelector("h2"), "disabled");
+    removeClass(getCircle(answerSelector), "selected");
   });
 
   // Reset  the Qustions selectors
-  questionsSelectors.forEach(questionSelector => {
-    removeClass(questionSelector.querySelector('img'), 'disabled');
-    removeClass(getCircle(questionSelector), 'selected');
+  questionsSelectors.forEach((questionSelector) => {
+    removeClass(questionSelector.querySelector("img"), "disabled");
+    removeClass(getCircle(questionSelector), "selected");
   });
 
   // Clear the lines between questions and answers
-  linesContainer.innerHTML = '';
+  linesContainer.innerHTML = "";
 
   // Reset show answer button
-  removeClass(showAnsBtn, 'disabled');
-  showAnsBtn.removeEventListener('click', showAnswer);
-  showAnsBtn.addEventListener('click', showAnswer);
+  removeClass(showAnsBtn, "disabled");
+  showAnsBtn.removeEventListener("click", showAnswer);
+  showAnsBtn.addEventListener("click", showAnswer);
 }
 
 function openResourcModal() {
   showBackdrop();
-  removeClass(resourceContainer, 'hidden');
+  removeClass(resourceContainer, "hidden");
 }
 
 function openHelpModal() {
   showBackdrop();
-  removeClass(helpContainer, 'hidden');
+  removeClass(helpContainer, "hidden");
 }
 
 function showBackdrop() {
-  removeClass(backdropContainer, 'hidden');
-  addClass(gameContainer, 'hidden');
+  removeClass(backdropContainer, "hidden");
+  addClass(gameContainer, "hidden");
 }
 
 function closeHelpModel() {
-  addClass(helpContainer, 'hidden');
-  addClass(resourceContainer, 'hidden');
-  addClass(backdropContainer, 'hidden');
-  removeClass(gameContainer, 'hidden');
+  addClass(helpContainer, "hidden");
+  addClass(resourceContainer, "hidden");
+  addClass(backdropContainer, "hidden");
+  removeClass(gameContainer, "hidden");
 }
 
 // Helper
 function getCircle(parent) {
-  return parent.querySelector('.match-circle');
+  return parent.querySelector(".match-circle");
 }
 
 function addClass(element, className) {
