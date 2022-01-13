@@ -125,22 +125,6 @@ function renderConnectionLines(questionCircle, answerCircle) {
   linesContainer.insertAdjacentHTML("beforeend", html);
 }
 
-// function rescaleWindow() {
-// const diffAppFromWindow = window.innerWidth - appContainer.clientWidth;
-// if (diffAppFromWindow > 0) {
-//   appContainer.style.right = `${diffAppFromWindow / 2}px`;
-//   appContainer.style.left = `${diffAppFromWindow / 2}px`;
-//   // Reset the scale
-//   appContainer.style.transform = "scale(1)";
-//   return;
-// }
-// if (window.innerWidth < window.innerHeight) console.log(window.innerHeight);
-// appContainer.style.left = `0px`;
-// appContainer.style.transform = `scale(${
-//   ((3 / 4) * window.innerWidth) / window.innerHeight
-// })`;
-// }
-
 function rescaleWindow(e) {
   // the equations ==> 2 * Left + appWidth * ratio = windowWidth
   //               ==> appHeight * ratio = windowHeigth
