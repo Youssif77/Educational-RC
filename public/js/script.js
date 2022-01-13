@@ -115,8 +115,8 @@ function disableQuestionAndAnswer(questionSelector, answerSelector) {
 }
 
 function renderConnectionLines(questionCircle, answerCircle) {
-  const x1 = questionCircle.offsetLeft + questionCircle.offsetWidth / 2;
-  const x2 = answerCircle.offsetLeft + answerCircle.offsetWidth / 2;
+  const x1 = questionCircle.offsetLeft;
+  const x2 = answerCircle.offsetLeft;
 
   // X1 from left the quesion, y1 from the top of svg
   // X2 from left the answer, y2 from the bottom of svg
@@ -126,7 +126,7 @@ function renderConnectionLines(questionCircle, answerCircle) {
 }
 
 function rescaleWindow(e) {
-  // the equations ==> 2 * Left + appWidth * ratio = windowWidth
+  // The equations ==> 2 * Left + appWidth * ratio = windowWidth
   //               ==> appHeight * ratio = windowHeigth
 
   // 1) if aspect of window greater than our app
